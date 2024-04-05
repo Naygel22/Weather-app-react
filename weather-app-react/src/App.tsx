@@ -1,61 +1,47 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { ShowTemperature } from './components/ShowTemperature';
+import { ShowWeatherImg } from './components/ShowWeatherImg';
 
 const apiKey = 'b41a3a5aa59fb23522ce7a9be4c1fc47';
 const apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=';
-const city = 'Białystok';
+const defaultCity = 'Białystok';
 
-const weathers = [
-  {
-    name: 'Clear',
-    url: 'images/clear.png'
-  },
-  {
-    name: 'Clouds',
-    url: 'images/clouds.png'
-  },
-  {
-    name: 'Drizzle',
-    url: 'images/drizzle.png'
-  },
-  {
-    name: 'Mist',
-    url: 'images/mist.png'
-  },
-  {
-    name: 'Rain',
-    url: 'images/rain.png'
-  },
-  {
-    name: 'Snow',
-    url: 'images/snow.png'
-  }
-];
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
+  const [newCityName, setNewCityName] = useState(defaultCity);
 
-  async function showWeather(city) {
+  async function showWeather(newCityName: string) {
     try {
-      const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+      const response = await fetch(apiUrl + newCityName + `&appid=${apiKey}`);
       const apiData = await response.json();
       setWeatherData(apiData);
+      setNewCityName('');
     } catch (error) {
       console.error('Error fetching weather data:', error);
     }
   }
 
   useEffect(() => {
-    showWeather(city);
+    showWeather(newCityName);
   }, []);
 
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    showWeather(newCityName)
+
+  }
+
   return (
-    <>
+    <form className='app' onSubmit={handleSubmit}>
       <div className='searchBar'>
-        <input type="text" className='inputText' />
+        <input type="text" className='inputText' value={newCityName} onChange={e => setNewCityName(e.target.value)} />
         <button className='buttonContainer'></button>
       </div>
 
-    </>
+      {weatherData && <ShowTemperature apiData={weatherData} />}
+      {weatherData && <ShowWeatherImg apiData={weatherData} />}
+    </form>
   )
 }
 
