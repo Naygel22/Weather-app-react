@@ -2,6 +2,6 @@
 
 export const ShowCityName = ({ apiData }) => {
   return (
-    <div>{ }</div>
+    <div className="cityName">{apiData.name}</div>
   )
 }

@@ -15,7 +15,7 @@ body {
 
 .app {
   /* background: rgb(145, 145, 233); */
-  background-image: url(skyimage3.jpg);
+  background-image: url("assets/skyimage3.jpg");
   width: 480px;
   border-radius: 15px;
   padding: 40px;
@@ -51,6 +51,7 @@ body {
   height: 40px;
   width: 40px;
   cursor: pointer;
+  border: none;
 }
 
 .temperature {
@@ -104,6 +105,10 @@ body {
   align-items: center;
 }
 
+.humiditySection {
+  margin-left: 45px;
+}
+
 .windImg {
   width: 50%;
   height: auto;
@@ -139,8 +144,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 30px;
-  padding-right: 91px;
   margin-top: 10px;
   font-weight: 700;
   color: white;
@@ -153,4 +156,9 @@ body {
     -1px 1px 0 #000,
     /* Czarna obwódka z dołu-lewej strony */
     1px 1px 0 #000;
+}
+
+.humidityText {
+  margin-top: 15px;
+  margin-left: 45px;
 }
