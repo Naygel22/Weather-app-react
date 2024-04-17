@@ -1,3 +1,4 @@
+import { Weather } from "../App"
 
 const weathers = [
   {
@@ -26,23 +27,25 @@ const weathers = [
   }
 ]
 
-export function ShowWeatherImg({ apiData }) {
-  const currentWeatherImg = apiData.weather[0].main
+type ShowWeatherImgProps = {
+  weatherImg: Weather['main']
+}
+
+export function ShowWeatherImg({ weatherImg }: ShowWeatherImgProps) {
+
+
+  const weatherImgData = weathers.find(w => w.name === weatherImg);
 
   return (
     <>
-      {weathers.map((weather) => {
-        if (weather.name === currentWeatherImg) {
-          return (
-            <img
-              className="weatherImg"
-              key={weather.name}
-              src={weather.url}
-              alt={weather.name}
-            />
-          )
-        }
-      })}
+      {weatherImgData && <img
+        className="weatherImg"
+        key={weatherImgData.name}
+        src={weatherImgData.url}
+        alt={weatherImgData.name}
+      />}
     </>
+
+
   )
 }

@@ -40,7 +40,7 @@ body {
 .buttonContainer {
   background-color: wheat;
   background-image: url("assets/search.png");
-  background-size: contain;
+  background-size: 20px;
   background-repeat: no-repeat;
   background-position: center;
   margin-left: 15px;
